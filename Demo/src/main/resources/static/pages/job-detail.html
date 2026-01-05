@@ -1,0 +1,147 @@
+<div class="job-header">
+    <div class="job-body">
+        <div class="company-header">
+            <img id="jdCompanyLogo" alt="Logo" class="company-logo" />
+        </div>
+        <div class="job-list">
+            <div class="company-info">
+                <a>
+                    <h1 id="jdCompanyName"></h1>
+                </a >
+                <h2 id ="jdJobTitle"></h2>
+            </div>
+
+
+            <div class="job-meta">
+                <div class="job-meta-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div class="job-meta-item-list ">
+                        <span class="label">Lương:</span>
+                        <span id="jdSalary"></span>
+                    </div>
+                </div>
+                <div class="job-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="job-meta-item-list ">
+                        <span class="label">Địa điểm:</span>
+                        <span id="jdLocate"></span>
+                    </div>
+                </div>
+                <div class="job-meta-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <div class="job-meta-item-list ">
+                        <span class="label">Hạn nộp hồ sơ</span>
+                        <span id="jdDeadline"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="job-actions-wrapper">
+                <div class="job-actions">
+                    <a class="btn btn-success">Ứng tuyển ngay</a>
+                    <form style="display:inline;">
+                        <input type="hidden" name="jobId" />
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </form>
+
+                </div>
+                <div class="job-calendar">
+                    <p><strong>Ngày cập nhật:</strong> <span id="jdPostedDate"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="job-tab">
+    <div class="tabs">
+        <div class="tab active" >Chi tiết tuyển dụng</div>
+        <div class="tab" >Thông tin công ty</div>
+    </div>
+    <div class="tab-content active">
+        <div class="section-title">
+            Thông tin chung
+        </div>
+        <div class="section-content-list">
+            <div class="info-item">
+                <i class="fas fa-calendar-day"></i>
+                <div class="info-text">
+                    <span class="label">Ngày đăng</span>
+                    <span class="value" id="jdPostedDate2"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-briefcase"></i>
+                <div class="info-text">
+                    <span class="label">Hình thức làm việc</span>
+                    <span class="value" id="jdJobType"></span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-industry"></i>
+                <div class="info-text">
+                    <span class="label">Ngành nghề</span>
+                    <span class="value" id="jdCategory"></span>
+                </div>
+            </div>
+        </div>
+        <div class="section-title">Mô tả công việc</div>
+        <div class="section-content" id="jdJobDescription"></div>
+
+        <div class="section-title">Yêu cầu công việc</div>
+        <div class="section-content" id = "jdRequirements"></div>
+
+        <div class="section-title">Quyền lợi</div>
+        <div class="section-content" id="jdBenefits"></div>
+
+    </div>
+
+    <div class="tab-content">
+        <div class="section-title" id="jdCompanyName2"></div>
+
+        <div class="section-tab-content">
+            <div class="section-tab-title">
+                <i class="section-tab-icon fas fa-envelope"></i>Email:
+            </div>
+            <span id="jdCompanyEmail"></span>
+        </div>
+        <div class="section-tab-content">
+
+            <div class="section-tab-title">
+                <i class="section-tab-icon fas fa-users"></i>
+                Quy mô:
+            </div>
+            <span id="jdCompanySize"></span>
+        </div>
+        <div class="section-tab-content">
+
+            <div class="section-tab-title">
+                <i class="section-tab-icon fas fa-id-card"></i>
+                Giấy phép công ty :
+            </div>
+            <a id="jdLicenseLink" target="_blank">Xem giấy phép</a>
+        </div>
+
+
+
+
+        <div class="section-tab-content" id="jdCompanyDescription">
+
+        </div>
+        <div class="section-tab-content">
+            <div class="section-tab-title">
+                <i class="section-tab-icon fas fa-map-marker-alt"></i>
+                Vị trí công ty:
+            </div>
+            <div id="map" style="height: 300px; width: 100%; border-radius: 8px;"></div>
+            <br />
+            <div class="map-button-wrapper">
+                <a id="directions-link" target="_blank" class="btn btn-primary">Chỉ đường đến đây</a>
+            </div>
+        </div>
+    </div>
+
+</div>
