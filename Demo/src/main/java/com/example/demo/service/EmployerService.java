@@ -157,6 +157,29 @@ public class EmployerService {
 
         return employerRepository.save(existing);
     }
+    public Employer updateEmployerWithoutFiles(UUID id, Employer employer) {
+        Employer existing = getEmployerById(id);
+        if (existing == null) throw new RuntimeException("Không tìm thấy công ty");
+
+        if (employer.getCompanyName() != null)
+            existing.setCompanyName(employer.getCompanyName());
+        if (employer.getCompanyEmail() != null)
+            existing.setCompanyEmail(employer.getCompanyEmail());
+        if (employer.getCompanySize() != null)
+            existing.setCompanySize(employer.getCompanySize());
+        if (employer.getCompanyDescription() != null)
+            existing.setCompanyDescription(employer.getCompanyDescription());
+        if (employer.getCompanyAddress() != null)
+            existing.setCompanyAddress(employer.getCompanyAddress());
+        if (employer.getLatitude() != null)
+            existing.setLatitude(employer.getLatitude());
+        if (employer.getLongitude() != null)
+            existing.setLongitude(employer.getLongitude());
+
+        // Không thao tác logo & license
+        return employerRepository.save(existing);
+    }
+
 
     public void deleteEmployer(UUID id) {
         employerRepository.deleteById(id);

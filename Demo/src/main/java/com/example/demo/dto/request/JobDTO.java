@@ -12,8 +12,9 @@ public class JobDTO {
     private String category;
     private LocalDateTime postedDate = LocalDateTime.now();
     private LocalDateTime applicationDeadline;
+    private String companyName;
 
-    public JobDTO(UUID id, String jobTitle, String locate, String salary, String jobType, String category, LocalDateTime postedDate, LocalDateTime applicationDeadline, String companyName, String companyLogo) {
+    public JobDTO(UUID id, String jobTitle, String locate, String salary, String jobType, String category, LocalDateTime postedDate, LocalDateTime applicationDeadline, String companyName, String companyLogo, String status) {
         this.id = id;
         this.jobTitle = jobTitle;
         this.locate = locate;
@@ -24,10 +25,7 @@ public class JobDTO {
         this.applicationDeadline = applicationDeadline;
         this.companyName = companyName;
         this.companyLogo = companyLogo;
-    }
-
-    public JobDTO() {
-
+        this.status = status;
     }
 
     public UUID getId() {
@@ -110,6 +108,14 @@ public class JobDTO {
         this.companyLogo = companyLogo;
     }
 
-    private String companyName;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     private String companyLogo;
+    private String status;
 }

@@ -40,7 +40,7 @@ function loadHomeData() {
                  onclick="openJobDetail('${job.id}'); event.preventDefault();">
                  Ứng tuyển ngay
               </a>
-              <button type="button">Lưu công việc</button>
+              <button type="button" onclick="saveJob('${job.id}')">Lưu công việc</button>
             </div>
           </div>
         `;

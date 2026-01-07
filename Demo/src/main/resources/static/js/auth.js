@@ -49,37 +49,64 @@ const endpoint = role === "employer"
   });
 }
 function initLogin(){
-  const form = document.getElementById("loginForm")
+  const form = document.getElementById("loginForm");
   if(!form) return;
-  form.addEventListener("submit", async(e) => {
-     e.preventDefault();
-  const payload = {
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const payload = {
       userName: document.getElementById("username").value.trim(),
       passWord: document.getElementById("password").value
     };
-try{
-const res = await fetch(API_BASE + "/auth/log-in",{
-method: "POST",
+
+    try {
+      const res = await fetch(API_BASE + "/auth/log-in", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-});
-const data = await res.json().catch(() => null);
-if(!res.ok){
+      });
 
-   setMsg("loginMsg", data?.message || "Sai tài khoản hoặc mật khẩu", false);
-   return;
-}
-  const token = data?.result?.token || data?.token;
-      if (token) localStorage.setItem("token", token);
-      updateNavbarAuth();
-       setMsg("loginMsg", "Đăng nhập thành công!", true);
-            setTimeout(() => loadPage("/pages/home.html"), 400);
+      if (!res.ok) {
+        setMsg("loginMsg", "Sai tài khoản hoặc mật khẩu", false);
+        return;
+      }
 
-}catch(e){
-  setMsg("loginMsg", "Không kết nối được server!", false);
+      const token = await res.text();
+      localStorage.setItem("token", token);
+
+      const meRes = await fetch(API_BASE + "/auth/me", {
+        headers: authHeader()
+      });
+
+      if (!meRes.ok) {
+        setMsg("loginMsg", "Không lấy được thông tin người dùng", false);
+        return;
+      }
+
+      const me = await meRes.json();
+
+
+      renderMenu(); // render lại menu NGAY
+
+      setMsg("loginMsg", "Đăng nhập thành công!", true);
+
+      // 👉 ĐIỀU HƯỚNG THEO ROLE
+    if (me.roles.includes("ROLE_ADMIN")) {
+        setTimeout(() => loadPage("/pages/admin-home.html"), 300);
+    } else if (me.roles.includes("ROLE_EMPLOYER")) {
+        setTimeout(() => loadPage("/pages/employer-home.html"), 300);
+    } else {
+        setTimeout(() => loadPage("/pages/home.html"), 300);
+    }
+
+
+    } catch (e) {
+      setMsg("loginMsg", "Không kết nối được server!", false);
+    }
+  });
 }
-  })
-}
+
 
 function updateNavbarAuth() {
   const loginLink = document.getElementById("nav-login");
@@ -101,7 +128,7 @@ function initLogout()
 {
 const logoutLink = document.getElementById("logoutLink");
 logoutLink.addEventListener("click" , e=>{
-e.preventDefault;
+e.preventDefault ();
 localStorage.removeItem("token");
  updateNavbarAuth();
  loadPage("/pages/home.html");

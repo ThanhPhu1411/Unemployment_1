@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
 
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -179,9 +184,44 @@ width: 100%;
             </h3>
         </div>
         <nav class="top-nav">
-            <a href="#" onclick="loadPage('/pages/home.html')">Trang chủ</a>
-            <a href="#" onclick="loadPage('/pages/login.html')" id="nav-login">Đăng nhập</a></nav>
-            <a id="logoutLink" href="#" style="display:none">Đăng xuất</a>
+            <!-- USER -->
+            <a href="#" class="menu-user" onclick="loadPage('/pages/home.html')">Trang chủ</a>
+            <a href="#" class="menu-user" onclick="loadPage('/pages/saveJob.html')">Công việc đã lưu</a>
+            <a href="#" class="menu-user" onclick="loadPage('/pages/application.html')">Đơn ứng tuyển</a>
+            <a href="#" class="menu-user" onclick="loadPage('/pages/searchjob.html')">Tìm kiếm</a>
+            <a href="#" class="menu-user" onclick="loadPage('/pages/notification.html')">Thông báo</a>
+            <a href="#" class="menu-user" onclick="loadPage('/pages/candidate.html')">Tạo CV</a>
+
+            <!-- EMPLOYER -->
+            <a href="#" class="menu-employer"
+               onclick="loadPage('/pages/employer-home.html')">
+                Trang chủ
+            </a>
+            <a href="#" class="menu-employer"
+               onclick="loadPage('/pages/company-profile.html')">
+                Hồ sơ công ty
+            </a>
+
+            <a href="#" class="menu-employer"  onclick="loadPage('/pages/notification.html')">Thông báo</a>
+            <!-- ADMIN -->
+
+            <a href="#" class="menu-admin"  onclick="loadPage('/pages/admin-home.html')">
+               Trang chủ
+            </a>
+            <a href="#" class="menu-admin"  onclick="loadPage('/pages/admin-company.html')">
+                 Công ty
+            </a>
+            <a href="#" class="menu-admin"  onclick="loadPage('/pages/admin-job.html')">
+                Tin tuyển dụng
+            </a>
+            <!-- CHUNG -->
+            <a id="logoutLink" href="#">Đăng xuất</a>
+            <a id="nav-login" href="#" onclick="loadPage('/pages/login.html')">Đăng nhập</a>
+
+
+        </nav>
+
+
 
     </header>
 
@@ -228,6 +268,31 @@ width: 100%;
 <script src="/js/home.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/jobdetail.js"></script>
+<script src="/js/saveJob.js"></script>
+<script src="/js/application.js"></script>
+<script src="/js/searchjob.js"></script>
+<script src="/js/notification.js"></script>
+<script src="/js/candidate.js"></script>
+<script src="/js/menu.js"></script>
+<script src="/js/employer-home.js"></script>
+<script src="/js/job.js"></script>
+<script src="/js/detailjob.js"></script>
+<script src="/js/edit-job.js"></script>
+<script src="/js/job-candidate.js"></script>
+<script src="/js/cv-form-viewer.js"></script>
+<!-- Leaflet JS (PHẢI CÓ) -->
+
+
+<script src="/js/company-profile.js"></script>
+<script src="/js/admin-home.js"></script>
+<script src="/js/add-category.js"></script>
+<script src="/js/add-jobtype.js"></script>
+<script src="/js/admin-company.js"></script>
+<script src="/js/admin-job.js"></script>
+
+<script src="/js/admin-job-detail.js"></script>
+<script src="/js/admin-company-detail.js" ></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     async function loadPage(url){
       const res = await fetch(url);
@@ -242,13 +307,74 @@ width: 100%;
        if (url.includes("register.html")) {
            initRegister();
       }
+       if (url.includes("saveJob.html")) {
+             loadSaveJobs();
+        }
+      if (url.includes("application.html")) {
+             loadApplication();
+     }
+     if (url.includes("searchjob.html")) {
+          initSearchJob();
+          loadSearchJob();
+      }
+         if (url.includes("notification.html")) {
+          loadNoti();
+      }
+         if (url.includes("/candidate.html")) {
+                initCandidate();
+      }
+         if (url.includes("employer-home.html")) {
+                initEmployerHome();
+      }
+         if (url.includes("create-job.html")) {
+                initCreateJob();
+      }
+        if (url.includes("detailjob.html")) {
+            initJob(); // <- chỉ gọi ở đây, lúc DOM đã sẵn sàng
+          }
+         if (url.includes("editjob.html")) {
 
+         initEditJob(); //  load options + load job + fill form
+        const form = document.getElementById("editJobForm");
+        if (form) form.onsubmit = submitEditForm; // ✅ prevent default submit
+  }
+    if (url.includes("/job-candidate.html")) {
+            initApplication(); // <- chỉ gọi ở đây, lúc DOM đã sẵn sàng
+          }
+             if (url.includes("/cv-form-viewer.html")) {
+            initCandidateCV(); // <- chỉ gọi ở đây, lúc DOM đã sẵn sàng
+          }
+               if (url.includes("/company-profile.html")) {
+            initCompanyProfile(); // <- chỉ gọi ở đây, lúc DOM đã sẵn sàng
+          }
+             if (url.includes("admin-home.html")) {
+                  loadAdminData(); // <- chỉ gọi ở đây, lúc DOM đã sẵn sàng
+          }
+          if (url.includes("add-category.html")) {
+            initAddCategory();
+          }
+          if (url.includes("add-jobtype.html")) {
+            initAddJobType();
+            }
+          if (url.includes("admin-company.html")) {
+            initAdminCompany();
+            }
+          if (url.includes("admin-company-detail.html")) {
+            window.initAdminCompanyDetail();
+        }
+             if (url.includes("admin-job.html")) {
+                initAdminJob();
+          }
+         if (url.includes("admin-job-detail.html")) {
+            initAdminJobDetail();
+         }
     }
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
       updateNavbarAuth();
       initLogout();
+       renderMenu();
       loadPage("/pages/home.html");
     });
 </script>

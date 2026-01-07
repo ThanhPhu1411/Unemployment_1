@@ -7,8 +7,9 @@ public class ApplicationDTO {
     private String status;
     private String saveStatus;
     private UUID candidateId;
+    private String fullName;
 
-    public ApplicationDTO(UUID applicationId, String status, String saveStatus, UUID candidateId, String fullName, String email, String phone) {
+    public ApplicationDTO(UUID applicationId, String status, String saveStatus, UUID candidateId, String fullName, String email, String phone, String userAvatar) {
         this.applicationId = applicationId;
         this.status = status;
         this.saveStatus = saveStatus;
@@ -16,6 +17,7 @@ public class ApplicationDTO {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.userAvatar = userAvatar;
     }
 
     public UUID getApplicationId() {
@@ -74,7 +76,15 @@ public class ApplicationDTO {
         this.phone = phone;
     }
 
-    private String fullName;
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
+
     private String email;
     private String phone;
+    private String userAvatar;
 }

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.request.CandidateProfileDTO;
 import com.example.demo.model.CandidateProfile;
 import com.example.demo.service.CandidateProfileService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ public class CandidateController {
     }
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/createCandidate")
-    public CandidateProfile createCandidate(
+    public CandidateProfileDTO createCandidate(
             @RequestPart("candidate") CandidateProfile candidateProfile,
             @RequestPart(value = "avatar", required = false) MultipartFile avatar,
             Authentication authentication
@@ -32,25 +33,46 @@ public class CandidateController {
     }
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/updateCandidate/{id}")
-    public CandidateProfile updateCandidate(
+//    public CandidateProfileDTO updateCandidate(
+//            @PathVariable("id") UUID id,
+//            @RequestPart(value = "candidate", required = false) CandidateProfile candidateProfile,
+//            @RequestPart(value = "avatar" , required = false)MultipartFile avatar,
+//            Authentication authentication
+//    ) throws IOException{
+//        UUID userId = UUID.fromString(authentication.getName());
+//        CandidateProfile  existing = candidateProfileService.getEntityById(id);
+//        if(!existing.getUser().getId().equals(userId))
+//        {
+//            throw new RuntimeException("Bạn không có quyền chính sửa hồ sơ này");
+//        }
+//        return candidateProfileService.updateCandidateProfile(id,candidateProfile,avatar);
+//    }
+
+    public CandidateProfileDTO updateCandidate(
             @PathVariable("id") UUID id,
-            @RequestPart(value = "candidate", required = false) CandidateProfile candidateProfile,
-            @RequestPart(value = "avatar" , required = false)MultipartFile avatar,
+            @RequestBody CandidateProfile candidateProfile, // chỉ JSON
             Authentication authentication
-    ) throws IOException{
+    ) {
         UUID userId = UUID.fromString(authentication.getName());
-        CandidateProfile existing = candidateProfileService.getCandidateProfile(id);
-        if(!existing.getUser().getId().equals(userId))
-        {
-            throw new RuntimeException("Bạn không có quyền chính sửa hồ sơ này");
+        CandidateProfile existing = candidateProfileService.getEntityById(id);
+
+        if (!existing.getUser().getId().equals(userId)) {
+            throw new RuntimeException("Bạn không có quyền chỉnh sửa hồ sơ này");
         }
-        return candidateProfileService.updateCandidateProfile(id,candidateProfile,avatar);
+
+        // Gọi service, avatar = null
+        try {
+            return candidateProfileService.updateCandidateProfile(id, candidateProfile, null);
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi khi cập nhật hồ sơ", e);
+        }
+
     }
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
     public String deleteCandidate(@PathVariable("id") UUID id,Authentication authentication)
     { UUID userId = UUID.fromString(authentication.getName());
-        CandidateProfile existing = candidateProfileService.getCandidateProfile(id);
+        CandidateProfile existing = candidateProfileService.getEntityById(id);
         if(!existing.getUser().getId().equals(userId))
         {
             throw new RuntimeException("Bạn không có quyền chính sửa hồ sơ này");
@@ -58,23 +80,24 @@ public class CandidateController {
         candidateProfileService.deleteCandidateProfile(id);
         return "Hồ sơ đã được xóa";
     }
+
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/me")
-    public CandidateProfile getMyCandidate(Authentication authentication)
+        @GetMapping("/me")
+    public CandidateProfileDTO getMyCandidate(Authentication authentication)
     {
         UUID userId = UUID.fromString(authentication.getName());
         return candidateProfileService.getMyCandidate(userId);
     }
     @GetMapping("/{id}")
-    public CandidateProfile getCandidateById(@PathVariable("id") UUID id,
+    public CandidateProfileDTO  getCandidateById(@PathVariable("id") UUID id,
                                              Authentication authentication)
     {
         UUID userId = UUID.fromString(authentication.getName());
-        CandidateProfile candidateProfile = candidateProfileService.getCandidateProfile(id);
+        CandidateProfile candidateProfile = candidateProfileService.getEntityById(id);
         if (!candidateProfile.getUser().getId().equals(userId)) {
             throw new RuntimeException("Bạn không có quyền xem hồ sơ của người khác!");
         }
 
-        return candidateProfile;
+        return candidateProfileService.getCandidateProfile(id);
     }
 }

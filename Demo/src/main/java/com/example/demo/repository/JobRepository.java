@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface
 JobRepository
-        extends JpaRepository<Job,UUID> {
+extends JpaRepository<Job,UUID> {
     List<Job> findByStatus(String status);
     List<Job> findByEmployerId(UUID employerId);
     @Query("""
