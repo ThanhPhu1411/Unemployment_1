@@ -1,0 +1,250 @@
+<style>
+    .job-create-container {
+    max-width: 920px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Header */
+.job-edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.job-edit-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0;
+    color: #1f2937;
+}
+
+.job-edit-header .sub {
+    margin: 6px 0 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Underline line */
+.job-edit-header h2::after {
+    content: "";
+    display: block;
+    margin-top: 10px;
+    width: 70px;
+    height: 4px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* Form */
+#editJobForm {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 16px;
+}
+
+/* textarea full width */
+#editJobForm .form-group:nth-child(5),
+#editJobForm .form-group:nth-child(6),
+#editJobForm .form-group:nth-child(7) {
+    grid-column: 1 / -1;
+}
+
+/* Buttons + msg full width */
+.form-buttons,
+#jobMsg {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 650;
+    font-size: 14px;
+    color: #374151;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    outline: none;
+    background: #fff;
+    transition: 0.25s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.13);
+}
+
+/* Buttons */
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.btn-submit {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+    transition: 0.25s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 28px rgba(37, 99, 235, 0.22);
+}
+
+.btn-cancel,
+.btn-outline {
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 750;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    transition: 0.25s ease;
+}
+
+.btn-cancel:hover,
+.btn-outline:hover {
+    background: #f9fafb;
+}
+
+/* Message */
+#jobMsg {
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    display: none;
+    margin-top: 6px;
+}
+
+#jobMsg.success {
+    display: block;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+#jobMsg.error {
+    display: block;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+@media (max-width: 768px) {
+    #editJobForm {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+<div class="job-create-container">
+
+    <!-- Header -->
+    <div class="job-edit-header">
+        <div>
+            <h2>Sửa công việc</h2>
+            <p class="sub">Cập nhật thông tin tin tuyển dụng của bạn</p>
+        </div>
+
+        <div class="job-edit-actions">
+            <button class="btn-outline" onclick="goBackToDetail()">← Quay lại</button>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form id="editJobForm">
+
+        <input type="hidden" id="jobId">
+
+        <div class="form-group">
+            <label>Tên công việc</label>
+            <input type="text" id="jobTitle" required placeholder="VD: Dev ReactJS">
+        </div>
+
+        <div class="form-group">
+            <label>Địa điểm</label>
+            <input type="text" id="locate" required placeholder="VD: TP.HCM">
+        </div>
+
+        <div class="form-group">
+            <label>Mức lương</label>
+            <input type="text" id="salary" required placeholder="VD: 15 - 25 triệu">
+        </div>
+
+        <div class="form-group">
+            <label>Mô tả công việc</label>
+            <textarea id="jobDescription" rows="5" placeholder="Nhập mô tả công việc..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Yêu cầu</label>
+            <textarea id="requirements" rows="4" placeholder="Nhập yêu cầu công việc..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Quyền lợi</label>
+            <textarea id="benefits" rows="4" placeholder="Nhập quyền lợi..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Hạn nộp hồ sơ</label>
+            <input type="date" id="applicationDeadline">
+        </div>
+
+        <div class="form-group">
+            <label>Ngành nghề</label>
+            <select id="categoryId"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Hình thức làm việc</label>
+            <select id="jobTypeId"></select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-buttons">
+            <button type="submit" class="btn-submit">
+                Cập nhật công việc
+            </button>
+
+            <button type="button" class="btn-cancel" onclick="goBackToDetail()">
+                 Hủy
+            </button>
+        </div>
+
+        <p id="jobMsg"></p>
+    </form>
+</div>

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface NotificationRepository
-        extends JpaRepository<Notification, Long> {
+extends JpaRepository<Notification, Long> {
     List<Notification> findByUserIdOrderBySentDateDesc(UUID userId);
 
     Optional<Notification> findByIdAndUserId(Long id, UUID userId);

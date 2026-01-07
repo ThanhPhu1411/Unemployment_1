@@ -1,0 +1,374 @@
+<style>
+    * { box-sizing: border-box; }
+body { margin: 0;   font-family: 'Segoe UI', sans-serif; background: #f4f6fb; }
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 18px;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e9ecf3;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+label { display: block; margin-top: 12px; margin-bottom: 6px; font-weight: 700; color: #1c2430; }
+input, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d7dbe6;
+  border-radius: 10px;
+  outline: none;
+}
+textarea { height: 110px; resize: vertical; }
+
+.actions { display: flex; gap: 10px; margin-top: 14px; }
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d7dbe6;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+.btn.primary { background: #5b2be0; border-color: #5b2be0; color: #fff; }
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  background: #eef2ff;
+  color: #3730a3;
+}
+.badge.edit { background: #ecfeff; color: #155e75; }
+.badge.create { background: #f0fdf4; color: #166534; }
+
+.avatar-row { display: flex; align-items: center; gap: 10px; }
+#avatarMini {
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover; background: #eef2f7;
+  border: 1px solid #d7dbe6;
+}
+
+.more { margin-top: 12px; }
+.more summary { cursor: pointer; font-weight: 800; }
+.block { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e9ecf3; }
+.block h3 { margin: 10px 0 0; }
+
+/* preview */
+.preview-wrap {
+  height: calc(100vh - 36px);
+  background: #fff;
+  border: 1px solid #e9ecf3;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.preview {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eef1f7;
+}
+
+.pv-left {
+  background: #163a52;
+  color: #fff;
+  padding: 16px;
+}
+
+.pv-avatar {
+  display: grid;
+  place-items: center;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+#avatarPreview {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e5e7eb;
+  border: 4px solid rgba(255,255,255,0.6);
+}
+
+.pv-section-title {
+  margin-top: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.pv-item { display: flex; gap: 10px; align-items: center; padding: 6px 0; opacity: 0.95; font-size: 13px; }
+
+.pv-right { padding: 18px; overflow: auto; }
+.pv-name { font-size: 28px; font-weight: 900; color: #111827; }
+.pv-title { margin-top: 6px; color: #6b7280; letter-spacing: 2px; font-weight: 800; }
+
+.pv-block { margin-top: 18px; }
+.pv-h { font-weight: 900; margin-bottom: 8px; }
+.pv-text { color: #1f2937; line-height: 1.55; white-space: pre-wrap; }
+
+.pv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.pv-mini { background: #f8fafc; border: 1px solid #eef2f7; border-radius: 12px; padding: 12px; }
+.pv-mini-h { font-weight: 900; margin-bottom: 6px; color: #111827; }
+
+</style>
+<div class="page">
+
+    <!-- LEFT: FORM -->
+    <section class="left">
+        <div class="card">
+            <div class="card-head">
+                <h2>Thông tin cơ bản</h2>
+                <span id="modeBadge" class="badge">Đang tải...</span>
+            </div>
+
+            <div class="grid2">
+                <div>
+                    <label>Tiêu đề hồ sơ</label>
+                    <input id="userPosition" placeholder="VD: Frontend Developer" />
+                </div>
+
+                <div>
+                    <label>Ảnh hồ sơ</label>
+                    <div class="avatar-row">
+                        <img id="avatarMini" alt="">
+                        <input type="file" id="avatar" accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <label>Họ và tên</label>
+            <input id="userName" placeholder="Nguyễn Văn A" />
+
+            <div class="grid2">
+                <div>
+                    <label>Email</label>
+                    <input id="userEmail" placeholder="email@example.com" />
+                </div>
+                <div>
+                    <label>Số điện thoại</label>
+                    <input id="userPhone" placeholder="0909xxxxxx" />
+                </div>
+            </div>
+
+            <div class="grid2">
+                <div>
+                    <label>Ngày sinh</label>
+                    <input id="userBirthDate" type="date" />
+                </div>
+                <div>
+                    <label>Facebook</label>
+                    <input id="userFacebook" placeholder="https://facebook.com/..." />
+                </div>
+            </div>
+
+            <label>Địa chỉ</label>
+            <input id="userAddress" placeholder="123 Quận 1, TP.HCM" />
+
+            <label>Mục tiêu nghề nghiệp</label>
+            <textarea id="careerObjective" placeholder="Giới thiệu sơ bộ..."></textarea>
+
+            <details class="more">
+                <summary>Thông tin bổ sung</summary>
+
+                <div class="block">
+                    <h3>Học vấn</h3>
+                    <div class="grid2">
+                        <div>
+                            <label>Năm</label>
+                            <input id="educationYear" placeholder="2018-2022" />
+                        </div>
+                        <div>
+                            <label>Trường/Ngành</label>
+                            <input id="education" placeholder="ĐH CNTT - ĐHQG" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h3>Kinh nghiệm</h3>
+                    <div class="grid2">
+                        <div>
+                            <label>Số năm</label>
+                            <input id="experienceYear" placeholder="2 năm" />
+                        </div>
+                        <div>
+                            <label>Mức lương mong muốn</label>
+                            <input id="desiredSalary" placeholder="15 - 20 triệu" />
+                        </div>
+                    </div>
+                    <label>Mô tả kinh nghiệm</label>
+                    <textarea id="experience" placeholder="Frontend tại công ty ABC, dùng ReactJS..."></textarea>
+                </div>
+
+                <div class="block">
+                    <h3>Việc mong muốn</h3>
+                    <label>Vị trí mong muốn</label>
+                    <input id="userDesiredJob" placeholder="Frontend ReactJS" />
+                </div>
+
+                <div class="block">
+                    <h3>Chứng chỉ</h3>
+                    <div class="grid2">
+                        <div>
+                            <label>Năm</label>
+                            <input id="certificateYear" placeholder="2023" />
+                        </div>
+                        <div>
+                            <label>Tên chứng chỉ</label>
+                            <input id="certificateName" placeholder="Chứng chỉ ReactJS - FPT" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h3>Giải thưởng</h3>
+                    <div class="grid2">
+                        <div>
+                            <label>Năm</label>
+                            <input id="prizeYear" placeholder="2022" />
+                        </div>
+                        <div>
+                            <label>Mô tả</label>
+                            <input id="prizeDesc" placeholder="Giải 3 cuộc thi lập trình Web" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h3>Kỹ năng</h3>
+                    <label>Ngoại ngữ</label>
+                    <input id="language" placeholder="English B2" />
+
+                    <label>Kỹ năng mềm</label>
+                    <input id="softSkill" placeholder="Teamwork, Giao tiếp..." />
+
+                    <label>Sở thích</label>
+                    <input id="interest" placeholder="Lập trình, đọc sách..." />
+                </div>
+            </details>
+
+            <div class="actions">
+                <button id="btnSave" class="btn primary">Hoàn tất</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RIGHT: PREVIEW -->
+    <section class="right">
+        <div class="preview-wrap">
+            <div class="preview">
+                <aside class="pv-left">
+                    <div class="pv-avatar">
+                        <img id="avatarPreview" alt="">
+                    </div>
+
+                    <div class="pv-section-title">LIÊN HỆ</div>
+                    <div class="pv-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span id="pPhone">—</span>
+                    </div>
+
+                    <div class="pv-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span id="pEmail">—</span>
+                    </div>
+
+                    <div class="pv-item">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span id="pBirth">—</span>
+                    </div>
+
+                    <div class="pv-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="pAddress">—</span>
+                    </div>
+
+                    <div class="pv-item">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span id="pFacebook">—</span>
+                    </div>
+
+                </aside>
+
+                <main class="pv-right">
+                    <div class="pv-name" id="pName">NGUYỄN VĂN A</div>
+                    <div class="pv-title" id="pPosition">TIÊU ĐỀ HỒ SƠ</div>
+
+                    <div class="pv-block">
+                        <div class="pv-h">MỤC TIÊU</div>
+                        <div class="pv-text" id="pObjective">Nhập mục tiêu nghề nghiệp để xem preview.</div>
+                    </div>
+
+                    <div class="pv-block">
+                        <div class="pv-h">HỌC VẤN</div>
+                        <div class="pv-text" id="pEdu">—</div>
+                    </div>
+
+                    <div class="pv-block">
+                        <div class="pv-h">KINH NGHIỆM</div>
+                        <div class="pv-text" id="pExp">—</div>
+                    </div>
+
+                    <div class="pv-grid">
+                        <div class="pv-mini">
+                            <div class="pv-mini-h">MONG MUỐN</div>
+                            <div class="pv-text" id="pDesired">—</div>
+                        </div>
+                        <div class="pv-mini">
+                            <div class="pv-mini-h">LƯƠNG</div>
+                            <div class="pv-text" id="pSalary">—</div>
+                        </div>
+                    </div>
+
+                    <div class="pv-grid">
+                        <div class="pv-mini">
+                            <div class="pv-mini-h">CHỨNG CHỈ</div>
+                            <div class="pv-text" id="pCert">—</div>
+                        </div>
+                        <div class="pv-mini">
+                            <div class="pv-mini-h">GIẢI THƯỞNG</div>
+                            <div class="pv-text" id="pPrize">—</div>
+                        </div>
+                    </div>
+
+                    <div class="pv-block">
+                        <div class="pv-h">KỸ NĂNG & SỞ THÍCH</div>
+                        <div class="pv-text" id="pSkill">—</div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+</div>

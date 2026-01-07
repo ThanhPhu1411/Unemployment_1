@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface EmployerRepository
-        extends JpaRepository<Employer, UUID> {
+extends JpaRepository<Employer, UUID> {
     boolean existsByCompanyName(String companyName);
     Optional<Employer> findByUserId(UUID userId);
 }

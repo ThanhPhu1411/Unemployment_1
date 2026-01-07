@@ -16,7 +16,21 @@ public class JobDetailResponse {
     private String requirements;
     private String benefits;
 
-    public JobDetailResponse(UUID id, String jobTitle, String salary, String locate, LocalDateTime applicationDeadline, LocalDateTime postedDate, String jobDescription, String requirements, String benefits, String jobType, String category, UUID employerId, String companyName, String companyEmail, String companySize, String licenseDocument, String companyDescription, Double latitude, Double longitude, String companyAddress, String companyLogo) {
+    private String jobType;
+
+
+    private String category;
+
+    private UUID employerId;
+    private String companyName;
+    private String companyEmail;
+    private String companySize;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public JobDetailResponse(UUID id, String jobTitle, String salary, String locate, LocalDateTime applicationDeadline, LocalDateTime postedDate, String jobDescription, String requirements, String benefits, String jobType, String category, UUID employerId, String companyName, String companyEmail, String companySize, String licenseDocument, String companyDescription, Double latitude, Double longitude, String companyAddress, String companyLogo, String status) {
         this.id = id;
         this.jobTitle = jobTitle;
         this.salary = salary;
@@ -38,12 +52,7 @@ public class JobDetailResponse {
         this.longitude = longitude;
         this.companyAddress = companyAddress;
         this.companyLogo = companyLogo;
-    }
-
-    private String jobType;
-
-    public UUID getId() {
-        return id;
+        this.status = status;
     }
 
     public void setId(UUID id) {
@@ -210,16 +219,20 @@ public class JobDetailResponse {
         this.companyLogo = companyLogo;
     }
 
-    private String category;
+    public String getStatus() {
+        return status;
+    }
 
-    private UUID employerId;
-    private String companyName;
-    private String companyEmail;
-    private String companySize;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     private String licenseDocument;
     private String companyDescription;
     private Double latitude;
     private Double longitude;
     private String companyAddress;
     private String companyLogo;
+    private String status;
+
 }

@@ -1,0 +1,92 @@
+ .tab-box {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 1rem;
+ }
+
+ .tab-content.active {
+     display: block;
+ }
+
+ .tab-content {
+     display: none;
+ }
+
+ .tab-btn {
+     padding: 10px 20px;
+     border: none;
+     background-color: transparent;
+     font-weight: bold;
+     font-size: 16px;
+     cursor: pointer;
+     color: #555;
+     transition: color 0.3s, border-bottom 0.3s;
+ }
+.tab{
+   padding: 10px 20px;
+     border: none;
+     background-color: transparent;
+     font-weight: bold;
+     font-size: 16px;
+     cursor: pointer;
+     color: #555;
+     transition: color 0.3s, border-bottom 0.3s;
+}
+ .tab-btn.active {
+     color: #007bff;
+     border-bottom: 2px solid #007bff;
+ }
+
+ .tab-content {
+     display: none;
+ }
+
+ .tab-content.active {
+     display: block;
+     animation: fadeIn 0.3s ease-in-out;
+ }
+
+
+
+ .card {
+     border-radius: 16px;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+ }
+
+ .form-floating label {
+     padding-left: 12px;
+ }
+
+ .btn-google {
+     background-color: white;
+     color: #555;
+     border: 1px solid #ddd;
+     font-weight: 500;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 8px;
+     border-radius: 4px;
+     text-decoration: none;
+     margin-bottom:16px;
+ }
+
+     .btn-google img {
+         height: 18px;
+         margin-right: 8px;
+     }
+
+     .btn-google:hover {
+         background-color: #f7f7f7;
+     }
+     .form-floating > input {
+       width: 100%;
+       padding: 10px 12px ;
+       height: auto ;
+       line-height: 1.4 ;
+       box-sizing: border-box;
+     }
+     .muted.center{
+        text-align: center;
+        margin-top:13px;
+     }

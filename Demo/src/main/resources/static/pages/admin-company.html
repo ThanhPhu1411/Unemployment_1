@@ -1,0 +1,182 @@
+<style>
+    /* ===== Tabs ===== */
+    .company-tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 10px 0 18px 0;
+    }
+
+    .tab-btn{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:14px;
+      color:#374151;
+      transition:.2s;
+      box-shadow:0 4px 14px rgba(0,0,0,0.03);
+    }
+
+    .tab-btn:hover{
+      background:#f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .tab-btn.active{
+      background:linear-gradient(90deg,#2563eb,#3b82f6);
+      color:#fff;
+      border-color:#2563eb;
+      box-shadow:0 8px 18px rgba(37,99,235,0.25);
+    }
+
+    /* ===== Table card ===== */
+    .admin-card{
+      background:#fff;
+      border-radius:14px;
+      padding:16px;
+      border:1px solid #e5e7eb;
+      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    #companyTitle{
+      margin:0 0 14px 0;
+      font-size:18px;
+      font-weight:900;
+      color:#111827;
+    }
+
+    /* ===== Table ===== */
+    .admin-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:12px;
+      font-size:14px;
+    }
+
+    .admin-table thead th{
+      background:#f9fafb;
+      padding:12px 10px;
+      text-align:left;
+      font-weight:900;
+      color:#374151;
+      border-bottom:1px solid #e5e7eb;
+    }
+
+    .admin-table tbody td{
+      padding:12px 10px;
+      border-bottom:1px solid #f1f5f9;
+      color:#374151;
+    }
+
+    .admin-table tbody tr:hover{
+      background:#f8fafc;
+    }
+
+    /* ===== Status Badge ===== */
+    .status-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      border:1px solid transparent;
+    }
+
+    .status-pending{
+      background:#fef3c7;
+      color:#92400e;
+      border-color:#fde68a;
+    }
+
+    .status-approved{
+      background:#dcfce7;
+      color:#166534;
+      border-color:#bbf7d0;
+    }
+
+    .status-rejected{
+      background:#fee2e2;
+      color:#991b1b;
+      border-color:#fecaca;
+    }
+
+    /* ===== Responsive ===== */
+    @media(max-width: 900px){
+      .admin-card{
+        padding:12px;
+      }
+
+      .admin-table thead{
+        display:none;
+      }
+
+      .admin-table tbody tr{
+        display:block;
+        background:#fff;
+        margin-bottom:12px;
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        padding:12px;
+      }
+
+      .admin-table tbody td{
+        display:flex;
+        justify-content:space-between;
+        border:none;
+        padding:8px 0;
+      }
+
+      .admin-table tbody td::before{
+        content: attr(data-label);
+        font-weight:900;
+        color:#6b7280;
+      }
+    }
+
+
+</style>
+<div class="admin-main">
+
+    <div class="admin-topbar">
+        <h2>Quản lý công ty</h2>
+        <p>Duyệt / từ chối các công ty đăng ký trên hệ thống</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="company-tabs">
+        <button class="tab-btn active" data-status="Đang chờ">Chờ duyệt</button>
+        <button class="tab-btn" data-status="Đã duyệt">Đã duyệt</button>
+        <button class="tab-btn" data-status="Từ chối">Từ chối</button>
+    </div>
+
+    <!-- Table -->
+    <div class="admin-card">
+        <h4 id="companyTitle">Danh sách công ty chờ duyệt</h4>
+
+        <table class="admin-table">
+            <thead>
+            <tr>
+                <th>Tên công ty</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Quy mô</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+
+            <tbody id="companyList">
+            <tr><td colspan="6">Đang tải...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
