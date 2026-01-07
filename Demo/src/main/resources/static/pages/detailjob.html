@@ -1,0 +1,275 @@
+<style>
+    .job-detail-container {
+    margin: 30px auto;
+    padding: 0 16px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* HEADER */
+.job-detail-header {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.job-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+    color: #111827;
+}
+
+.job-subtitle {
+    margin-top: 10px;
+    color: #6b7280;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.dot {
+    opacity: 0.6;
+}
+
+/* ACTIONS */
+.job-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* GRID */
+.job-detail-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* CARD */
+.job-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.04);
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.job-card h4 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 750;
+    color: #111827;
+}
+
+.job-text {
+    color: #374151;
+    line-height: 1.6;
+    white-space: pre-line; /* giữ xuống dòng */
+}
+
+/* INFO BOX */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e5e7eb;
+    font-size: 14px;
+    color: #374151;
+}
+
+.info-row strong {
+    color: #111827;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+/* BADGES */
+.badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.badge-active {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.badge-expired {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.badge-hidden {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+/* BUTTONS */
+.btn {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+    box-shadow: 0 10px 20px rgba(37,99,235,0.18);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: white;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+}
+
+.btn-outline-danger {
+    background: white;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+.btn-outline-danger:hover {
+    background: #fff5f5;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    filter: brightness(0.95);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Sticky right */
+.sticky {
+    position: sticky;
+    top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .job-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+<div class="job-detail-container">
+
+    <!-- Header -->
+    <div class="job-detail-header">
+        <div class="job-title-area">
+            <h2 id="jobTitle" class="job-title">Đang tải...</h2>
+
+            <div class="job-subtitle">
+                <span class="dot">•</span>
+                <span id="jobLocate">...</span>
+                <span class="dot">•</span>
+                <span id="jobSalary">...</span>
+            </div>
+        </div>
+
+        <div class="job-actions">
+            <button class="btn btn-primary" id="btnCandidates"> Xem ứng viên</button>
+            <button id="btnEdit" class="btn btn-outline-secondary" >Sửa</button>
+            <button class="btn btn-danger" id="btnDelete">️ Xóa</button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="job-detail-grid">
+
+        <!-- LEFT -->
+        <div class="job-detail-main">
+
+            <div class="job-card">
+                <h4>Mô tả công việc</h4>
+                <p id="jobDescription" class="job-text">...</p>
+            </div>
+
+            <div class="job-card">
+                <h4>Yêu cầu</h4>
+                <p id="jobRequirements" class="job-text">...</p>
+            </div>
+
+            <div class="job-card">
+                <h4>Quyền lợi</h4>
+                <p id="jobBenefits" class="job-text">...</p>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="job-detail-side">
+
+            <div class="job-card sticky">
+                <h4>Thông tin công việc</h4>
+
+                <div class="info-row">
+                    <span> Địa điểm</span>
+                    <strong id="infoLocate">...</strong>
+                </div>
+
+                <div class="info-row">
+                    <span> Mức lương</span>
+                    <strong id="infoSalary">...</strong>
+                </div>
+
+                <div class="info-row">
+                    <span> Ngày đăng</span>
+                    <strong id="infoPostedDate">...</strong>
+                </div>
+
+                <div class="info-row">
+                    <span> Hạn nộp</span>
+                    <strong id="infoDeadline">...</strong>
+                </div>
+                <div class="info-row">
+                    <span> Ngành nghề</span>
+                    <strong id="categoryId">...</strong>
+                </div>
+                <div class="info-row">
+                    <span> Hình thức làmv việc</span>
+                    <strong id="jobTypeId">...</strong>
+                </div>
+
+                <hr />
+            </div>
+
+        </div>
+    </div>
+
+</div>

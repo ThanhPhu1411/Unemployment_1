@@ -1,0 +1,287 @@
+<style>
+    .detail-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.detail-header h2{
+  margin:0;
+  font-size:26px;
+  font-weight:900;
+  color:#111827;
+}
+
+.sub{
+  margin:6px 0 0 0;
+  color:#6b7280;
+}
+
+.header-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap:14px;
+}
+
+/* Card */
+.admin-card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom:14px;
+}
+
+.admin-card h3{
+  margin:0 0 10px 0;
+  font-weight:900;
+  color:#111827;
+}
+
+.admin-card h4{
+  margin:0 0 10px 0;
+  font-weight:900;
+  color:#111827;
+}
+
+/* Meta */
+.job-meta{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+  font-size:14px;
+  color:#374151;
+}
+
+.job-meta i{
+  color:#2563eb;
+  margin-right:6px;
+}
+
+/* Dates + info */
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px dashed #e5e7eb;
+  font-size:14px;
+}
+.info-row:last-child{ border-bottom:none; }
+
+/* Text */
+.text{
+  color:#374151;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+/* Company box */
+.company-box{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:12px;
+}
+.company-box img{
+  width:70px;
+  height:70px;
+  border-radius:14px;
+  object-fit:cover;
+  border:2px solid #e5e7eb;
+}
+.gray{
+  color:#6b7280;
+  margin:6px 0;
+}
+
+/* Buttons */
+.btn-outline{
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  font-weight:900;
+}
+.btn-success{
+  border:none;
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:900;
+  background:#22c55e;
+  color:#fff;
+}
+.btn-danger{
+  border:none;
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:900;
+  background:#ef4444;
+  color:#fff;
+}
+
+.btn-outline:hover{ background:#f9fafb; }
+.btn-success:hover{ filter:brightness(0.95); }
+.btn-danger:hover{ filter:brightness(0.95); }
+
+/* Badge */
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:13px;
+}
+.status-pending{
+  background:#fef3c7;
+  color:#92400e;
+  border:1px solid #fde68a;
+}
+.status-approved{
+  background:#dcfce7;
+  color:#166534;
+  border:1px solid #bbf7d0;
+}
+.status-rejected{
+  background:#fee2e2;
+  color:#991b1b;
+  border:1px solid #fecaca;
+}
+
+/* Reject textarea */
+#rejectReason{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  outline:none;
+  transition:.2s;
+  resize:vertical;
+}
+#rejectReason:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+}
+
+/* Utils */
+.w-100{ width:100%; }
+.mt-2{ margin-top:10px; }
+
+@media(max-width:980px){
+  .detail-grid{ grid-template-columns:1fr; }
+  .job-meta{ grid-template-columns:1fr; }
+}
+
+</style>
+<div class="admin-main">
+
+    <!-- Header -->
+    <div class="detail-header">
+        <div class="header-left">
+            <h2 id="jobDetailTitle">Chi tiết công việc</h2>
+            <p class="sub">
+                Trạng thái:
+                <span id="jobStatusBadge" class="status-badge status-pending">🟡 Chờ duyệt</span>
+            </p>
+        </div>
+
+        <div class="header-actions">
+            <button class="btn-outline" onclick="goBackJob()">← Quay lại</button>
+            <button class="btn-danger" id="btnRejectJob"> Từ chối</button>
+            <button class="btn-success" id="btnApproveJob"> Duyệt</button>
+        </div>
+    </div>
+
+    <div class="detail-grid">
+
+        <!-- LEFT -->
+        <div class="detail-left">
+
+            <!-- Job info -->
+            <div class="admin-card">
+                <h3 id="jobTitle">Tên công việc</h3>
+
+                <div class="job-meta">
+                    <span><i class="bi bi-geo-alt"></i> <b>Địa điểm:</b> <span id="jobLocate">—</span></span>
+                    <span><i class="bi bi-cash-coin"></i> <b>Lương:</b> <span id="jobSalary">—</span></span>
+                    <span><i class="bi bi-briefcase"></i> <b>Hình thức:</b> <span id="jobType">—</span></span>
+                    <span><i class="bi bi-tags"></i> <b>Ngành:</b> <span id="jobCategory">—</span></span>
+                </div>
+
+                <hr>
+
+                <div class="job-dates">
+                    <div class="info-row">
+                        <span>Ngày đăng</span>
+                        <strong id="postedDate">—</strong>
+                    </div>
+                    <div class="info-row">
+                        <span> Hạn nộp</span>
+                        <strong id="deadlineDate">—</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="admin-card">
+                <h4>Mô tả công việc</h4>
+                <p id="jobDescription" class="text">—</p>
+            </div>
+
+            <!-- Requirements -->
+            <div class="admin-card">
+                <h4>Yêu cầu</h4>
+                <p id="jobRequirements" class="text">—</p>
+            </div>
+
+            <!-- Benefits -->
+            <div class="admin-card">
+                <h4>Quyền lợi</h4>
+                <p id="jobBenefits" class="text">—</p>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="detail-right">
+
+            <!-- Company -->
+            <div class="admin-card">
+                <h4>Thông tin công ty</h4>
+
+                <div class="company-box">
+                    <img id="companyLogo" alt="logo">
+                    <div>
+                        <h3 id="companyName">Tên công ty</h3>
+                        <p id="companyEmail" class="gray">Email: —</p>
+                        <p id="companyAddress" class="gray">Địa chỉ: —</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span> Quy mô</span>
+                    <strong id="companySize">—</strong>
+                </div>
+
+                <button class="btn-outline w-100 mt-2" id="btnViewCompanyDetail">
+                     Xem hồ sơ công ty
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

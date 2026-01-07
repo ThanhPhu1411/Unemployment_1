@@ -42,7 +42,7 @@ public class EmployerController {
             @RequestPart(value = "license", required = false) MultipartFile license,
             Authentication authentication
     ) throws IOException {
-        UUID userId = UUID.fromString(authentication.getName());
+         UUID userId = UUID.fromString(authentication.getName());
         return employerService.create(employer, logo, license);
     }
     @PreAuthorize("hasRole('ADMIN')")
@@ -59,23 +59,47 @@ public class EmployerController {
     }
     @PreAuthorize("hasRole('EMPLOYER')")
     @PutMapping("/{id}")
+//    public Employer updateEmployer(
+//            @PathVariable UUID id,
+//            @RequestPart(value="employer",required = false) Employer employer,
+//            @RequestPart(value = "logo", required = false) MultipartFile logo,
+//            @RequestPart(value = "license", required = false) MultipartFile license,
+//            Authentication authentication
+//    ) throws IOException {
+//
+//        UUID userId = UUID.fromString(authentication.getName());
+//
+//        Employer myEmployer = employerService.getMyEmployer(userId);
+//
+//        if (!myEmployer.getId().equals(id)) {
+//            throw new RuntimeException("Bạn không có quyền cập nhật công ty này");
+//        }
+//        return employerService.updateEmployer(id, employer, logo, license);
+//    }
+
     public Employer updateEmployer(
             @PathVariable UUID id,
-            @RequestPart(value="employer",required = false) Employer employer,
-            @RequestPart(value = "logo", required = false) MultipartFile logo,
-            @RequestPart(value = "license", required = false) MultipartFile license,
+            @RequestBody Employer employer,  // chỉ nhận JSON
             Authentication authentication
-    ) throws IOException {
+    ) {
 
+        // Lấy userId từ token
         UUID userId = UUID.fromString(authentication.getName());
 
+        // Kiểm tra quyền
         Employer myEmployer = employerService.getMyEmployer(userId);
-
         if (!myEmployer.getId().equals(id)) {
             throw new RuntimeException("Bạn không có quyền cập nhật công ty này");
         }
-        return employerService.updateEmployer(id, employer, logo, license);
+
+        // Gọi service update, logo & license = null
+        try {
+            return employerService.updateEmployer(id, employer, null, null);
+        } catch (IOException e) {
+            throw new RuntimeException("Lỗi cập nhật công ty", e);
+        }
     }
+
 
     @PreAuthorize("hasRole('EMPLOYER')")
     @DeleteMapping("/me")

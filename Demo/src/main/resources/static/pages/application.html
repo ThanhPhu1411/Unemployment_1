@@ -1,0 +1,313 @@
+<style>
+    .section-header {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    .container-jobs {
+      max-width: 1100px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 24px;
+      background-color: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+
+
+
+    .job-card {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.08);
+      border-color: #bfdbfe;
+    }
+
+
+    .job-card-left {
+      display: flex;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .company-logo-save {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo-img-detail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .job-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+
+    .job-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .job-name {
+      margin: 6px 0 0 0;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+
+    .job-details-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .job-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f9fafb;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .job-meta-item i {
+      font-size: 16px;
+      color: #64748b;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .job-meta-item-list {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .job-meta-item-list .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+
+
+    .status-text {
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+
+
+    .job-type {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+       margin-top: 24px;
+      margin-bottom: 24px;
+
+    }
+
+    /*
+
+    .job-card-right-bottom {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+<!--    .expire-text {-->
+<!--      margin: 0;-->
+<!--      font-size: 12px;-->
+<!--      color: #374151;-->
+<!--      background: #f3f4f6;-->
+<!--      padding: 6px 10px;-->
+<!--      border-radius: 10px;-->
+<!--      border: 1px solid #e5e7eb;-->
+<!--    }-->
+
+<!--    .expired-text {-->
+<!--      font-size: 12px;-->
+<!--      font-weight: 700;-->
+<!--      color: #be123c;-->
+<!--      background: #fff1f2;-->
+<!--      padding: 6px 10px;-->
+<!--      border-radius: 10px;-->
+<!--      border: 1px solid #fecdd3;-->
+<!--    }-->
+
+
+
+    .empty-saved-job {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: #fff;
+      max-width: 800px;
+      margin: 40px auto;
+      border: 1px dashed #e5e7eb;
+      border-radius: 12px;
+    }
+
+    .empty-saved-job img {
+      width: 320px;
+      margin-bottom: 16px;
+    }
+
+    .empty-saved-job p {
+      font-size: 16px;
+      color: #6b7280;
+    }
+
+
+
+    @media (max-width: 768px) {
+      .job-card {
+        padding: 14px;
+      }
+
+      .company-logo-save {
+        width: 60px;
+        height: 60px;
+      }
+
+      .job-title {
+        font-size: 16px;
+      }
+
+      .job-card-right-bottom {
+        position: static;
+        margin-top: 10px;
+        align-items: flex-start;
+      }
+
+      .job-details-list {
+        gap: 8px;
+      }
+    }
+
+        }
+</style>
+<div class="container-jobs">
+    <h2 class="page-title">Trạng Thái Hồ Sơ Ứng Tuyển</h2>
+    <p class="page-subtitle">Theo dõi tiến trình nộp hồ sơ của bạn</p>
+
+    <div id="empty-applications" class="empty-saved-job" style="display:none;">
+        <img src="/images/undraw_file-search_cbur.svg" />
+        <p>Không có hồ sơ ứng tuyển</p>
+    </div>
+
+    <div class="jobs-list" id="applications-list"></div>
+</div>
+
+
+<div id="job-template" class="job-card" style="display:none; cursor:pointer;">
+    <div class="job-card-left">
+        <div class="company-logo-save">
+            <img class="logo-img-detail" width="80" />
+        </div>
+
+        <div class="job-info">
+            <h4 class="job-title"></h4>
+
+            <div class="job-details">
+                <p class="job-name"></p>
+        <div class="job-details-list">
+            <div class="job-meta-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <div class="job-meta-item-list ">
+                    <span class="label">Lương</span>
+                    <span class="job-salary"></span>
+                </div>
+            </div>
+
+            <div class="job-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="job-meta-item-list ">
+                    <span class="label">Vị trí</span>
+                    <span class="job-locate"></span>
+                </div>
+
+            </div>
+
+            <div class="job-meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <div class="job-meta-item-list ">
+                    <span class="label">Ngày ứng tuyển</span>
+                    <span class="apply-date"></span>
+                </div>
+
+            </div>
+
+            <p class="expire-text"></p>
+
+            <p class="status-text">
+                <i class="fas fa-clipboard-check"></i>
+                <span class="status-badge"></span>
+            </p>
+
+            <span class="job-type"></span>
+
+            <p class="expired-text" style="display:none; color:red; font-weight:bold;">
+                Công việc này đã hết hạn
+            </p>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>

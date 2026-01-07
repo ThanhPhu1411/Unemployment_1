@@ -1,0 +1,443 @@
+<style>
+    /* ===========================
+   COMPANY PROFILE - CSS FULL
+   =========================== */
+
+.company-profile-container {
+  max-width: 1150px;
+  margin: 30px auto;
+  padding: 0 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* ===== Header ===== */
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.company-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.company-header .sub {
+  margin: 6px 0 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ===== Button Primary ===== */
+.btn-primary {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 900;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+.btn-primary i {
+  margin-right: 8px;
+}
+
+/* ===== Layout Grid ===== */
+.company-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+}
+
+/* ===== Left Preview ===== */
+.company-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Preview Card */
+.preview-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+}
+
+.preview-card h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #111827;
+}
+
+/* Logo box */
+.logo-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.logo-box img {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  border: 2px solid #e5e7eb;
+  object-fit: cover;
+  background: #fff;
+}
+
+.btn-upload {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 900;
+  transition: 0.2s;
+}
+
+.btn-upload:hover {
+  background: #f9fafb;
+}
+
+.btn-upload.small {
+  border-radius: 50%;
+  padding: 8px 10px;
+}
+
+/* Preview text */
+.preview-card h3 {
+  margin: 14px 0 6px 0;
+  font-size: 20px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.tagline {
+  margin: 10px 0;
+  font-weight: 700;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* License input */
+#licenseInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  transition: 0.25s;
+  cursor: pointer;
+  background: #fff;
+}
+
+#licenseInput:hover {
+  background: #f9fafb;
+}
+
+.hint {
+  font-size: 13px;
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+.license-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: 900;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.license-link i {
+  margin-right: 6px;
+}
+
+.license-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Form Area ===== */
+.company-form {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+}
+
+#companyForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Inputs */
+.form-group label {
+  display: block;
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  transition: 0.25s;
+  font-size: 14px;
+  background: #fff;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* Full width group */
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+/* ===== Map Search Box ===== */
+.map-search {
+  display: flex;
+  gap: 10px;
+}
+
+.map-search input {
+  flex: 1;
+}
+
+/* Search Button */
+#btnSearchMap {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+  transition: 0.2s;
+}
+
+#btnSearchMap:hover {
+  filter: brightness(0.95);
+}
+
+/* Leaflet map */
+#companyMap {
+  width: 100%;
+  height: 320px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-top: 10px;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.map-hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ===== Message ===== */
+#companyMsg {
+  grid-column: 1 / -1;
+  display: none;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+#companyMsg.success {
+  display: block;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+#companyMsg.error {
+  display: block;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Hide bootstrap d-none */
+.d-none {
+  display: none !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .company-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #companyForm {
+    grid-template-columns: 1fr;
+  }
+
+  #companyMap {
+    height: 280px;
+  }
+}
+
+</style>
+<!-- COMPANY PROFILE PAGE -->
+<div class="company-profile-container">
+
+    <!-- Header -->
+    <div class="company-header">
+        <div>
+            <h2>Hồ sơ công ty</h2>
+            <p class="sub">Cập nhật thông tin công ty để tăng độ tin cậy với ứng viên</p>
+        </div>
+
+        <button type="button" class="btn-primary" id="btnSaveCompany">
+            <i class="fa fa-save"></i> Lưu thay đổi
+        </button>
+
+    </div>
+
+    <!-- Main layout -->
+    <div class="company-grid">
+
+        <!-- LEFT: Preview -->
+        <div class="company-preview">
+
+            <!-- Preview Card -->
+            <div class="preview-card">
+                <div class="logo-box">
+                    <img id="logoPreview"  alt="logo">
+
+                        <input type="file" id="logoInput" hidden accept="image/*">
+                        <button class="btn-upload small" id="btnChangeLogo" type="button" title="Đổi logo">
+                            <i class="fa fa-camera"></i>
+                        </button>
+                </div>
+
+                <h3 id="companyNamePreview">Tên công ty</h3>
+                <p id="companyEmailPreview" class="tagline">Email công ty...</p>
+                <p id="companySizePreview" class="tagline">Quy mô...</p>
+                <p id="companyAddressPreview" class="tagline">Địa chỉ...</p>
+            </div>
+
+            <!-- License Upload -->
+            <div class="preview-card">
+                <h4>Giấy phép kinh doanh</h4>
+
+                <input type="file" id="licenseInput" accept="image/*,.pdf">
+
+                <p class="hint">Chấp nhận: PDF / JPG / PNG</p>
+
+                <a id="licensePreview" href="#" target="_blank" class="license-link d-none">
+                    <i class="fa fa-file"></i> Xem giấy phép hiện tại
+                </a>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="company-form">
+            <form id="companyForm">
+
+                <!-- hidden employer id -->
+                <input type="hidden" id="employerId">
+
+                <div class="form-group">
+                    <label>Tên công ty</label>
+                    <input type="text" id="companyName" placeholder="VD: Công ty ABC">
+                </div>
+
+                <div class="form-group">
+                    <label>Email công ty</label>
+                    <input type="email" id="companyEmail" placeholder="VD: hr@abc.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Quy mô công ty</label>
+                    <input type="text" id="companySize" placeholder="VD: 51-200">
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" id="companyAddress" placeholder="VD: Quận 1, TP.HCM">
+                </div>
+
+                <div class="form-group full">
+                    <label>Giới thiệu công ty</label>
+                    <textarea id="companyDescription" rows="5"
+                              placeholder="Mô tả về công ty, văn hóa, môi trường làm việc..."></textarea>
+                </div>
+
+                <!-- Map Search -->
+                <div class="form-group full">
+                    <label>Chọn vị trí công ty trên bản đồ</label>
+
+                    <div class="map-search">
+                        <input type="text" id="mapSearch" placeholder="Nhập địa chỉ để tìm... (VD: Quận 1, TP.HCM)">
+                        <button type="button" id="btnSearchMap">Tìm</button>
+                    </div>
+
+                    <!-- Leaflet Map -->
+                    <div id="companyMap"></div>
+
+                    <small class="map-hint">
+                        📍 Bạn có thể click/drag marker trên bản đồ để chọn vị trí. Latitude/Longitude sẽ tự động cập nhật.
+                    </small>
+                </div>
+
+                <!-- Latitude / Longitude -->
+                <div class="form-group">
+                    <label>Latitude</label>
+                    <input type="text" id="latitude" placeholder="10.123456">
+                </div>
+
+                <div class="form-group">
+                    <label>Longitude</label>
+                    <input type="text" id="longitude" placeholder="106.123456">
+                </div>
+
+                <!-- Message -->
+                <p id="companyMsg"></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>

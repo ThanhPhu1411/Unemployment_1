@@ -95,11 +95,16 @@ public class JobService {
                 job.getEmployer().getLatitude(),
                 job.getEmployer().getLongitude(),
                 job.getEmployer().getCompanyAddress(),
-                job.getEmployer().getCompanyLogo()
+                job.getEmployer().getCompanyLogo(),
+                job.getStatus()
         );
     }
 
-    public JobDetailResponseDTO updateJobForEmployer(UUID userId, UUID jobId, Job job) {
+    public JobDetailResponseDTO updateJobForEmployer(
+            UUID userId,
+            UUID jobId,
+            JobUpdateRequestDTO dto
+    ) {
 
         Job existing = jobRepository.findById(jobId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy công việc"));
@@ -107,34 +112,41 @@ public class JobService {
         Employer employer = employerRepository.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("Bạn chưa tạo thông tin công ty"));
 
+        // check quyền
         if (!existing.getEmployer().getId().equals(employer.getId())) {
             throw new RuntimeException("Bạn không có quyền sửa công việc này");
         }
 
-        existing.setJobTitle(job.getJobTitle());
-        existing.setJobDescription(job.getJobDescription());
-        existing.setLocate(job.getLocate());
-        existing.setSalary(job.getSalary());
-        existing.setBenefits(job.getBenefits());
-        existing.setRequirements(job.getRequirements());
+        // update các field
+        existing.setJobTitle(dto.getJobTitle());
+        existing.setLocate(dto.getLocate());
+        existing.setJobDescription(dto.getJobDescription());
+        existing.setRequirements(dto.getRequirements());
+        existing.setBenefits(dto.getBenefits());
+        existing.setSalary(dto.getSalary());
+        existing.setApplicationDeadline(dto.getApplicationDeadline());
 
-        existing.setCategory(
-                categoryRepository.findById(job.getCategory().getId())
-                        .orElseThrow(() -> new RuntimeException("Category không tồn tại"))
-        );
+        // update category
+        if (dto.getCategoryId() != null) {
+            Category category = categoryRepository.findById(dto.getCategoryId())
+                    .orElseThrow(() -> new RuntimeException("Category không tồn tại"));
+            existing.setCategory(category);
+        }
 
-        existing.setJobType(
-                jobTypeRepository.findById(job.getJobType().getId())
-                        .orElseThrow(() -> new RuntimeException("JobType không tồn tại"))
-        );
+        // update jobType
+        if (dto.getJobTypeId() != null) {
+            JobType jobType = jobTypeRepository.findById(dto.getJobTypeId())
+                    .orElseThrow(() -> new RuntimeException("JobType không tồn tại"));
+            existing.setJobType(jobType);
+        }
 
-        existing.setStatus("Đang chờ");
+        existing.setStatus("Đang chờ"); // reset trạng thái
 
         Job saved = jobRepository.save(existing);
 
-        // ✅ Return DTO (category/jobType dạng string name)
+        // map sang DTO (trả cả ID + name)
         return new JobDetailResponseDTO(
-                saved.getId(),                       // jobId UUID
+                saved.getId(),
                 saved.getJobTitle(),
                 saved.getLocate(),
                 saved.getJobDescription(),
@@ -144,10 +156,10 @@ public class JobService {
                 saved.getStatus(),
                 saved.getPostedDate(),
                 saved.getApplicationDeadline(),
-
-                saved.getCategory() != null ? saved.getCategory().getName() : null,
-                saved.getJobType() != null ? saved.getJobType().getName() : null
+                saved.getCategory() != null ? saved.getCategory().getName() : null, // phải là String
+                saved.getJobType() != null ? saved.getJobType().getName() : null     // phải là String
         );
+
     }
 
 
@@ -192,7 +204,7 @@ public class JobService {
                                 job.getSalary(),
                                 job.getApplicationDeadline(),
                                 job.getEmployer().getCompanyLogo()
-                        )).toList();
+                )).toList();
     }
 
 
@@ -221,12 +233,13 @@ public class JobService {
                         job.getPostedDate(),
                         job.getApplicationDeadline(),
                         job.getEmployer().getCompanyName(),
-                        job.getEmployer().getCompanyLogo()
+                       job.getEmployer().getCompanyLogo(),
+                        job.getStatus()
                 ))
                 .collect(Collectors.toList());
     }
 
-    public List<JobDTO> gẹtob()
+    public List<JobDTO> getJob()
     {
         return jobRepository.findAll().stream().map(
                 job ->  new JobDTO(
@@ -239,7 +252,8 @@ public class JobService {
                         job.getPostedDate(),
                         job.getApplicationDeadline(),
                         job.getEmployer().getCompanyName(),
-                        job.getEmployer().getCompanyLogo()
+                        job.getEmployer().getCompanyLogo(),
+                        job.getStatus()
                 )
         ).toList();
     }

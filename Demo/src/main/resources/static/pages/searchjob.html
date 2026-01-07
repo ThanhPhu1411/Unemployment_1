@@ -1,0 +1,187 @@
+<style>
+        .jobs-grid-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+
+    .section-header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    }
+
+    .container-jobs {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fafafa;
+    max-width: 1014px;
+    min-height: 284px;
+    margin: 40px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .job-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    }
+
+    .job-card-left {
+    display: flex;
+    margin-right: 8px;
+    }
+
+    .job-info {
+    margin-left: 8px;
+    }
+
+    .job-name {
+    color: rgba(122, 122, 122, 1);
+    }
+
+    .job-list-search {
+    display: flex;
+    gap: 2.5rem;
+    }
+
+    .empty-saved-job {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: 40px auto;
+    }
+
+    .empty-saved-job h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    }
+
+    .empty-saved-job img {
+    width: 400px;
+    margin-bottom: 20px;
+    }
+
+    .empty-saved-job p {
+    font-size: 18px;
+    color: #666;
+    }
+
+    .btn-danger {
+    margin-bottom: 8px;
+    }
+
+    .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+    padding: 4px;
+    }
+
+    .delete-btn:hover {
+    color: darkred;
+    }
+
+    /* Các nút điều hướng cố định bên trái & phải màn hình */
+    .btn-fixed-left, .btn-fixed-right {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    pointer-events: auto;
+    }
+
+    .btn-fixed-left {
+    left: 20px;
+    }
+
+    .btn-fixed-right {
+    right: 20px;
+    }
+
+    .btn-page-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 0;
+}
+     .job-type {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #2563eb;
+    }
+    .save-btn i {
+  color: #2563eb;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.save-btn:hover i {
+  color: #ef4444; /* đỏ */
+  transform: scale(1.15);
+}
+</style>
+<h2 class="mb-4">Tìm việc làm</h2>
+
+<div class="job-search-bar mb-4 row g-2">
+    <div class="col-md-4">
+        <input id="searchKeyword" class="form-control" placeholder="Từ khóa (ví dụ: Lập trình, Marketing...)" />
+    </div>
+    <div class="col-md-3">
+        <input id="searchLocate" class="form-control" placeholder="Địa điểm" />
+    </div>
+    <div class="col-md-3">
+        <input id="searchCategory" class="form-control" placeholder="Danh mục công việc" />
+    </div>
+    <div class="col-md-2">
+        <button id="searchBtn" class="btn btn-primary w-100">Tìm kiếm</button>
+    </div>
+</div>
+
+<div id="empty-jobs" class="empty-saved-job" style="display:none;">
+    <img src="/uploads/images/undraw_file-search_cbur.svg" alt="Không tìm thấy" />
+    <p>Không tìm thấy công việc phù hợp với từ khóa đã nhập.</p>
+</div>
+
+<div id="jobs-grid-list" class="jobs-grid-list"></div>
+
+<template id="job-card-template">
+    <div class="job-card" style="cursor:pointer;">
+        <div class="job-card-left">
+            <div class="company-logo-save">
+                <img class="logo-img-detail" width="80" />
+            </div>
+            <div class="job-info">
+                <h4 class="job-title"></h4>
+                <div class="job-details">
+                    <p class="job-name"></p>
+                    <div class="job-list-search">
+                        <p><i class="fas fa-map-marker-alt"></i> <span class="job-locate"></span></p>
+                        <p><i class="fas fa-dollar-sign"></i> <span class="job-salary"></span></p>
+                        <p class="job-deadline"></p>
+                    </div>
+                    <span class="job-type"></span>
+                    <p class="job-expired" style="color:red;font-weight:bold;margin-top:10px;display:none;">Công việc này đã hết hạn</p>
+                </div>
+            </div>
+        </div>
+        <div class="job-card-right">
+            <button class="btn save-btn">
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+</template>
