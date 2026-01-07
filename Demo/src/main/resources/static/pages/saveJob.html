@@ -1,0 +1,213 @@
+<style>
+    /* ===== CONTAINER ===== */
+    .container-jobs {
+      border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fafafa;
+    max-width: 1014px;
+    min-height: 284px;
+    margin: 40px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== HEADER ===== */
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+
+    /* ===== LIST ===== */
+    .jobs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ===== CARD ===== */
+    .job-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    /* ===== LEFT ===== */
+    .job-card-left {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    /* LOGO */
+  .company-logo-save{
+  width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    object-fit: cover;
+    padding: 5px;
+  }
+
+    .logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e5e7eb;
+    }
+
+    /* ===== INFO ===== */
+    .job-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .job-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111827;
+      margin: 0;
+    }
+
+    .company-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2563eb;
+      margin: 0;
+    }
+
+    /* DETAILS */
+    .job-details {
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .job-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 6px 0;
+    }
+
+    .job-list i {
+      color: #2563eb;
+      margin-right: 4px;
+    }
+
+    /* TYPE */
+    .job-type {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    /* ===== RIGHT ===== */
+    .job-card-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .delete-btn {
+      border: none;
+      background: #fee2e2;
+      color: #dc2626;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .delete-btn:hover {
+      background: #fecaca;
+      transform: scale(1.05);
+    }
+
+    /* ===== EMPTY ===== */
+    .empty-saved-job {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-saved-job img {
+      width: 260px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .empty-saved-job h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .empty-saved-job p {
+      font-size: 15px;
+    }
+    .logo-img-detail{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+    }
+</style>
+
+<div class="container-jobs">
+    <!-- Chỉ bao phần tiêu đề -->
+    <div class="section-header">
+        <h2>Công việc đã lưu</h2>
+    </div>
+    <div class="jobs-list">
+        <div class="job-card" id="job-template">
+            <div class="job-card-left">
+                <div class="company-logo-save">
+                    <img class="logo-img-detail" src="" alt="Logo" width="80" />
+                </div>
+                <div class="job-info">
+                    <span class="badge"></span>
+                    <h4 class="job-title"></h4>
+                    <div class="job-details">
+                        <p class="company-name"></p>
+                        <div class="job-list">
+                            <p><i class="fas fa-map-marker-alt"></i> <span class="job-locate"></span></p>
+                            <p><i class="fas fa-dollar-sign"></i> <span class="job-salary"></span></p>
+                            <p><i class="fas fa-clock"></i> <span class="job-time"></span></p>
+                        </div>
+                        <span class="job-type"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="job-card-right">
+                <button class="delete-btn">
+                    <i class="fas fa-heart" style="color:red;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="empty-saved-job" class="empty-saved-job" style="display:none;">
+        <h2>Việc làm đã lưu</h2>
+        <img src="/uploads/images/undraw_approved-wireframe_odf4.svg" alt="Không có việc làm" />
+        <p>Bạn chưa có việc làm đã lưu</p>
+    </div>
+</div>

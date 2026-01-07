@@ -1,0 +1,274 @@
+<style>
+    .candidates-container {
+  max-width: 1050px;
+  margin: 30px auto;
+  padding: 0 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.candidates-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.page-subtitle {
+  margin: 8px 0 0 0;
+  color: #6b7280;
+}
+
+.btn-outline {
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-weight: 700;
+}
+
+.btn-outline:hover {
+  background: #f9fafb;
+}
+
+/* Filters */
+.filters-box {
+  display: grid;
+  grid-template-columns: 1fr 180px 180px;
+  gap: 12px;
+  background: #fff;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.05);
+}
+
+.filters-box input,
+.filters-box select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  transition: 0.25s;
+}
+
+.filters-box input:focus,
+.filters-box select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.13);
+}
+
+/* Candidate List */
+.candidate-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Candidate Card */
+.candidate-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.04);
+  transition: 0.25s ease;
+}
+
+.candidate-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.06);
+}
+
+/* Left section */
+.candidate-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex: 1;
+}
+
+.avatar img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.candidate-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.candidate-meta {
+  margin: 6px 0 10px 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.candidate-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Right section */
+.candidate-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+
+/* Buttons */
+.btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: white;
+}
+
+.btn-success {
+  background: #22c55e;
+  color: white;
+  max-width: 100px;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn:hover {
+  filter: brightness(0.95);
+}
+
+/* Status badge */
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-approved {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-rejected {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .filters-box {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .candidate-right {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+</style>
+<div class="candidates-container">
+
+    <!-- Header -->
+    <div class="candidates-header">
+        <div>
+            <h2 class="page-title">Ứng viên ứng tuyển</h2>
+        </div>
+
+        <button class="btn-outline" onclick="goBackToJobDetail()">← Quay lại</button>
+    </div>
+
+    <!-- List -->
+    <div id="candidateList" class="candidate-list"></div>
+
+    <!-- TEMPLATE -->
+    <template id="candidateTemplate">
+        <div class="candidate-card">
+            <div class="candidate-left">
+                <div class="avatar">
+                    <img class="candidate-avatar" src="/uploads/images/default-avatar.png" alt="avatar">
+                </div>
+
+                <div class="candidate-info">
+                    <h4 class="candidate-name"></h4>
+                    <p class="candidate-meta">
+                        <span class="candidate-email"></span> •
+                        <span class="candidate-phone"></span>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="candidate-right">
+                <span class="badge candidate-status"></span>
+
+                <div class="actions">
+                    <button class="btn btn-primary btn-view-cv">Xem CV</button>
+                    <button class="btn btn-success btn-approve">Duyệt</button>
+                    <button class="btn btn-danger btn-reject">Từ chối</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</div>
