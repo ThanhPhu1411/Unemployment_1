@@ -1,0 +1,360 @@
+<style>
+    .cv-form-container{
+  max-width:1200px;
+  margin:24px auto;
+  padding:0 16px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Topbar */
+.cv-topbar{
+  background:#fff;
+  border:1px solid #f0f0f0;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.06);
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  position:sticky;
+  top:10px;
+  z-index:10;
+}
+
+.cv-page-title{
+  margin:0;
+  font-size:26px;
+  font-weight:900;
+  color:#111827;
+}
+
+.cv-job{
+  margin:6px 0 0 0;
+  color:#6b7280;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.topbar-right{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+/* Buttons */
+.btn{
+  border:none;
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:13px;
+  transition:.2s;
+}
+.btn-primary{ background:linear-gradient(90deg,#2563eb,#3b82f6); color:#fff; }
+.btn-success{ background:#22c55e; color:#fff; }
+.btn-danger{ background:#ef4444; color:#fff; }
+.btn-outline{
+  background:#fff;
+  border:1px solid #e5e7eb;
+}
+.btn:hover{ filter:brightness(0.95); }
+
+/* Badges */
+.badge{
+  padding:6px 12px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:13px;
+}
+.badge-pending{ background:#fef3c7; color:#92400e; }
+.badge-approved{ background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+.badge-rejected{ background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+
+/* Layout */
+.cv-layout{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:16px;
+  margin-top:16px;
+}
+
+/* Sidebar */
+.cv-sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.cv-profile{
+  background:#fff;
+  border:1px solid #f0f0f0;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.05);
+  text-align:center;
+}
+
+.avatar{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #e5e7eb;
+}
+
+.name{
+  margin:12px 0 4px 0;
+  font-size:20px;
+  font-weight:900;
+  color:#111827;
+}
+
+.position{
+  margin:0;
+  color:#6b7280;
+  font-weight:700;
+}
+
+/* Boxes */
+.cv-box{
+  background:#fff;
+  border:1px solid #f0f0f0;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.04);
+}
+
+.cv-box h4{
+  margin:0 0 12px 0;
+  font-size:16px;
+  font-weight:900;
+}
+
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px dashed #e5e7eb;
+  font-size:14px;
+  color:#374151;
+}
+.info-row:last-child{ border-bottom:none; }
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.tag{
+  background:#f3f4f6;
+  color:#374151;
+  font-weight:800;
+  font-size:13px;
+  padding:6px 10px;
+  border-radius:999px;
+}
+
+/* Main */
+.cv-main{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.cv-section{
+  background:#fff;
+  border:1px solid #f0f0f0;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.04);
+}
+
+.cv-section h4{
+  margin:0 0 12px 0;
+  font-size:18px;
+  font-weight:900;
+  color:#111827;
+}
+
+.text{
+  margin:0;
+  color:#374151;
+  line-height:1.65;
+  white-space:pre-line;
+}
+
+/* Timeline */
+.timeline-item{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #f3f4f6;
+}
+.timeline-item:last-child{ border-bottom:none; }
+.time{
+  font-weight:900;
+  color:#2563eb;
+}
+.project-card{
+  background:#f9fafb;
+  border:1px solid #eef2ff;
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+}
+
+/* List */
+.list{
+  margin:0;
+  padding-left:16px;
+  color:#374151;
+  line-height:1.6;
+}
+.list a{ color:#2563eb; font-weight:800; text-decoration:none; }
+.list a:hover{ text-decoration:underline; }
+
+/* Responsive */
+@media(max-width: 980px){
+  .cv-layout{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+<div class="cv-form-container">
+
+    <!-- TOP ACTION BAR -->
+    <div class="cv-topbar">
+        <div class="topbar-left">
+            <h2 class="cv-page-title">CV ứng viên</h2>
+            <p class="cv-job">
+                <strong id="jobName"></strong>
+                <span id="applicationStatus" class="badge badge-pending">Đang chờ</span>
+            </p>
+        </div>
+
+        <div class="topbar-right">
+            <button class="btn btn-success" id="btnApprove"> Duyệt</button>
+            <button class="btn btn-danger" id="btnReject"> Từ chối</button>
+            <button class="btn btn-outline" onclick="goBackToCandidates()">← Quay lại</button>
+        </div>
+    </div>
+
+    <!-- CV BODY -->
+    <div class="cv-layout">
+
+        <!-- LEFT -->
+        <div class="cv-sidebar">
+
+            <!-- PROFILE -->
+            <div class="cv-profile">
+                <img id="avatar" class="avatar" src="/uploads/images/default-avatar.png">
+                <h3 id="fullName" class="name"></h3>
+                <p id="position" class="position"></p>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="cv-box">
+                <h4>Thông tin liên hệ</h4>
+
+                <div class="info-row">
+                    <span>Email</span>
+                    <strong id="email"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>SĐT</span>
+                    <strong id="phone"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Địa chỉ</span>
+                    <strong id="address"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Ngày sinh</span>
+                    <strong id="birthDate"></strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Facebook</span>
+                    <a id="facebook" target="_blank"></a>
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="cv-box">
+                <h4>Kỹ năng</h4>
+                <div id="skills"></div>
+
+            </div>
+
+            <!-- LANGUAGES -->
+            <div class="cv-box">
+                <h4>Ngôn ngữ</h4>
+                <ul id="languages" class="list"></ul>
+            </div>
+
+            <!-- SALARY -->
+            <div class="cv-box">
+                <h4>Mức lương mong muốn</h4>
+                <strong id="desiredSalary"></strong>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="cv-main">
+
+            <!-- OBJECTIVE -->
+            <div class="cv-section">
+                <h4>Mục tiêu nghề nghiệp</h4>
+                <p id="careerObjective" class="text"></p>
+            </div>
+
+            <!-- DESIRED JOB -->
+            <div class="cv-section">
+                <h4>Vị trí mong muốn</h4>
+                <p id="desiredJob" class="text"></p>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="cv-section">
+                <h4>Học vấn</h4>
+                <div id="educationList"></div>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="cv-section">
+                <h4>Kinh nghiệm làm việc</h4>
+                <div id="experienceList"></div>
+            </div>
+
+            <!-- CERTIFICATES -->
+            <div class="cv-section">
+                <h4>Chứng chỉ</h4>
+                <ul id="certificates" class="list"></ul>
+            </div>
+
+            <!-- PRIZES -->
+            <div class="cv-section">
+                <h4>Giải thưởng</h4>
+                <ul id="prizes" class="list"></ul>
+            </div>
+
+            <!-- INTEREST -->
+            <div class="cv-section">
+                <h4>Sở thích</h4>
+                <p id="interest" class="text"></p>
+            </div>
+
+        </div>
+    </div>
+</div>

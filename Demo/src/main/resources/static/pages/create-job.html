@@ -1,0 +1,211 @@
+<style>
+    /* ====== Page Layout ====== */
+.job-create-container {
+    margin: 30px auto;
+    background: #fff;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.job-create-container h2 {
+    font-size: 26px;
+    font-weight: 750;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.job-create-container h2::after {
+    content: "";
+    display: block;
+    margin-top: 10px;
+    width: 80px;
+    height: 4px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+.job-create-container p {
+    margin: 0;
+}
+
+/* ====== Form Grid ====== */
+#createJobForm {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 cột */
+    gap: 18px 16px;
+}
+
+/* Các textarea dài sẽ chiếm full */
+#createJobForm .form-group:nth-child(4),
+#createJobForm .form-group:nth-child(5),
+#createJobForm .form-group:nth-child(6) {
+    grid-column: 1 / -1;
+}
+
+/* Deadline + Category + JobType thành 3 ô đẹp hơn */
+#createJobForm .form-group:nth-child(7),
+#createJobForm .form-group:nth-child(8),
+#createJobForm .form-group:nth-child(9) {
+    grid-column: span 1;
+}
+
+/* Button + msg full width */
+#createJobForm button,
+#jobMsg {
+    grid-column: 1 / -1;
+}
+
+/* ====== Form Group ====== */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 650;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* Inputs / Select / Textarea */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    outline: none;
+    background: #fff;
+    transition: 0.25s ease;
+}
+
+/* Textarea */
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+/* Focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.13);
+}
+
+/* Placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* ====== Button ====== */
+#createJobForm button[type="submit"] {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+    transition: 0.25s ease;
+}
+
+#createJobForm button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 28px rgba(37, 99, 235, 0.22);
+}
+
+#createJobForm button[type="submit"]:active {
+    transform: translateY(0px);
+}
+
+/* ====== Message ====== */
+#jobMsg {
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    display: none; /* chỉ show khi có nội dung */
+}
+
+/* Success/Error classes bạn tự add bằng JS */
+#jobMsg.success {
+    display: block;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+#jobMsg.error {
+    display: block;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    #createJobForm {
+        grid-template-columns: 1fr; /* 1 cột trên mobile */
+    }
+}
+
+</style>
+<div class="job-create-container">
+    <h2>Đăng công việc mới</h2>
+
+    <form id="createJobForm">
+        <div class="form-group">
+            <label>Tên công việc</label>
+            <input type="text" id="jobTitle" required>
+        </div>
+
+        <div class="form-group">
+            <label>Địa điểm</label>
+            <input type="text" id="locate" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mức lương</label>
+            <input type="text" id="salary" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mô tả công việc</label>
+            <textarea id="jobDescription" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Yêu cầu</label>
+            <textarea id="requirements" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Quyền lợi</label>
+            <textarea id="benefits" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Hạn nộp hồ sơ</label>
+            <input type="date" id="applicationDeadline">
+        </div>
+
+        <div class="form-group">
+            <label>Ngành nghề</label>
+            <select id="categoryId"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Hình thức làm việc</label>
+            <select id="jobTypeId"></select>
+        </div>
+
+        <button type="submit">Đăng công việc</button>
+        <p id="jobMsg"></p>
+    </form>
+</div>

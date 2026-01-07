@@ -1,0 +1,91 @@
+<style>
+    .container {
+    max-width: 600px;
+    padding: 40px;
+}
+
+.logo-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .logo-header img {
+        width: 50px; /* Giảm kích thước logo */
+        margin-bottom: 10px;
+    }
+
+    .logo-header h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 10px;
+
+}
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: #ccc; /* hoặc màu bạn muốn */
+    }
+
+.btn-submit {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+       }
+
+    .btn-submit:hover {
+        background-color: #218838;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+.btn-primary{
+    margin-top: 20px;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+}
+</style>
+<div class="form-container">
+    <div class="form-group">
+        <label for="Name">Tên hình thức làm việc</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+    </div>
+    <button type="button" id="btnAddJobType" class="btn btn-primary">Thêm mới</button>
+</div>
